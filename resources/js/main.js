@@ -1,7 +1,3 @@
-// This is just a sample app. You can structure your Neutralinojs app code as you wish.
-// This example app is written with vanilla JavaScript and HTML.
-// Feel free to use any frontend framework you like :)
-
 const mainview = document.getElementsByClassName("mainview")[0];
 
 function showInfo() {
@@ -13,23 +9,30 @@ function showInfo() {
 }
 
 function setTray() {
-    if(NL_MODE != "window") {
+    if (NL_MODE != "window") {
         console.log("INFO: Tray menu is only available in the window mode.");
         return;
     }
     let tray = {
         icon: "/resources/images/icons/app/trayIcon.png",
         menuItems: [
-            {id: "ABOUT", text: "About"},
-            {id: "SEP", text: "-"},
-            {id: "QUIT", text: "Quit"}
+            {
+                id: "ABOUT",
+                text: "About"
+            }, {
+                id: "SEP",
+                text: "-"
+            }, {
+                id: "QUIT",
+                text: "Quit"
+            }
         ]
     };
     Neutralino.os.setTray(tray);
 }
 
 function onTrayMenuItemClicked(event) {
-    switch(event.detail.id) {
+    switch (event.detail.id) {
         case "ABOUT":
             Neutralino.window.create('/pages/about.html', {
                 icon: '/images/icons/app/appIcon.png',
@@ -57,12 +60,16 @@ function onWindowMinimize() {
     Neutralino.window.minimize();
 }
 
+
 Neutralino.init();
+
+// this doesn't work?
+Neutralino.window.setDraggableRegion("draggable");
 
 Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
 Neutralino.events.on("windowClose", onWindowClose);
 
-if(NL_OS != "Darwin") { // TODO: Fix https://github.com/neutralinojs/neutralinojs/issues/615
+if (NL_OS != "Darwin") { // TODO: Fix https://github.com/neutralinojs/neutralinojs/issues/615
     setTray();
 }
 
@@ -79,7 +86,7 @@ async function getNews() {
     const xmlDoc = parser.parseFromString(xml, "text/xml");
     const items = xmlDoc.getElementsByTagName("entry");
     let html = "";
-    for(let i = 0; i < items.length; i++) {
+    for (let i = 0; i < items.length; i++) {
         const item = items[i];
         const title = item.getElementsByTagName("title")[0].childNodes[0].nodeValue;
         const link = item.getElementsByTagName("link")[0].getAttribute("href");
@@ -101,18 +108,16 @@ async function getNews() {
     document.getElementById('feed').innerHTML = html;
 }
 
-async function load_page(url) {  
-    mainview.innerHTML = await (await fetch(url)).text();
+async function load_page(url) {
+    mainview.innerHTML = await(await fetch(url)).text();
     if (url == 'pages/home.html') {
         getNews();
     }
-  }
+}
 
 
 function open_in_new_tab(url) {
     Neutralino.os.open(url);
 }
 
-//getNews();
-
-
+// getNews();

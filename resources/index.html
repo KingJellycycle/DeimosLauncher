@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Deimos</title>
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/styles.css">
+
+    </head>
+    <body>
+        <div class="topbar draggable">
+            <div class="windowOptions">
+                <div onclick="onWindowMinimize()" class="minimise"></div>
+                <div onclick="onWindowClose()" class="close"></div>
+            </div>
+        </div>
+        <div id="nav" class="nav">
+            <a href="#" onclick="load_page('pages/home.html');">
+                <span class="home">
+                    <div class="tooltip">Home</div>
+                </span>
+            </a>
+            <a href="#" onclick="load_page('pages/bound.html')">
+                <span class="bound">
+                    <div class="tooltip">Bound</div>
+                </span>
+            </a>
+            <a href="#" onclick="load_page('pages/settings.html')">
+                <span class="settings">
+                    <div class="tooltip">Settings</div>
+                </span>
+            </a>
+        </div>
+        <div class="mainview">
+            >.>
+        </div>
+        <div class="bottombar">
+            <div class="progressbar">
+                <div class="progress-text">20%</div>
+                <div class="progress" style="width: 20%"></div>
+            </div>
+            <a class="button">
+                Play
+            </a>
+        </div>
+
+        <script src="js/neutralino.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+
+</html>

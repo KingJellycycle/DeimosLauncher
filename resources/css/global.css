@@ -1,0 +1,183 @@
+
+@font-face {
+    font-family: nunito;
+    src: url(../fonts/NunitoSans-Regular.ttf);
+    font-weight: 500;
+  }
+:root {
+    
+    --blur-amount: 15px;
+    --border-radius-value: 5px;
+    --standard-colour: rgba(25,25,25,0.6);
+    --standard-border-colour: rgba(42,42,42,0.6);
+    --standard-text-colour: white;
+    --dimmed-text: rgba(200, 200, 200, 0.9);
+
+    --background-colour: #080808;
+
+    --button-initial-colour: #9e0b35;
+    --button-hover-colour: #e01d54;
+    --button-pressed-colour: #7d092a;
+    --button-disabled-colour: #450618;
+}
+
+html,body {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    font-family: nunito;
+
+    background-color: var(--background-colour);
+    color: rgb(255, 255, 255);
+    margin: 0;
+    height:100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+}
+
+
+.nav {
+    pointer-events: visible;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    vertical-align: middle;
+    /*justify-content: space-evenly;*/
+    background-color: var(--button-initial-colour);
+    color: white;
+    text-decoration: none;
+    width: 50px;
+    margin: 0;
+    left: 0px;
+    right: 0;
+    transform: translateY(-50%);
+    top: 50%;
+    border-radius: var(--border-radius-value);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    z-index: 10;
+    backdrop-filter: blur(var(--blur-amount));
+}
+
+.nav span {
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    /* same as height! */
+    padding: 0;
+    margin: 0;
+    bottom: 0;
+    vertical-align: middle;
+    text-align: center;
+
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-color 0.2s ease;
+}
+
+
+
+.nav a:first-child {
+    border-radius: var(--border-radius-value);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.nav a:last-child {
+    border-radius: var(--border-radius-value);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.nav a:first-child span {
+    border-radius: var(--border-radius-value);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.nav a:last-child span {
+    border-radius: var(--border-radius-value);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
+.nav span.home {
+    background-image: url("/images/icons/nav/Home-Icon.svg");
+}
+
+.nav span.bound {
+    background-image: url("/images/icons/nav/Blog-Icon.svg");
+}
+
+.nav span.information {
+    background-image: url("/images/icons/nav/Information-Icon.svg");
+}
+
+.nav span.settings {
+    background-image: url("/images/icons/nav/Settings-Icon.svg");
+}
+
+.nav span:hover {
+    background-color: var(--button-hover-colour);
+}
+
+.nav span:active {
+    background-color: var(--button-pressed-colour);
+}
+
+
+.nav span .tooltip {
+    visibility: hidden;
+    color: white;
+    width: 120px;
+    backdrop-filter: blur(var(--blur-amount));
+    background-color: var(--button-hover-colour);
+    text-align: center;
+    border-radius: var(--border-radius-value);
+    left: 55px;
+    /* Position the tooltip */
+    transition: ease background-color 0.2s;
+    position: absolute;
+    opacity: 0;
+}
+
+.nav span:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+.nav span:active .tooltip {
+    background-color: var(--button-pressed-colour);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: var(--button-disabled-colour); 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--button-initial-colour); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--button-hover-colour); 
+  }

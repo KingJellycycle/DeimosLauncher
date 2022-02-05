@@ -1,5 +1,8 @@
 # Developer tools' files
 .lite_workspace.lua
+.github/
+.vscode/
+.tmp/
 
 # Neutralinojs binaries and builds
 /bin

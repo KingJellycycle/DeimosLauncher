@@ -130,7 +130,7 @@ async function getPatches() {
     const latestresponse = await fetch(latesturl);
     const latestjson = await latestresponse.json();
     const patchurl = "http://192.168.0.196/bound/patches/" + latestjson.version + "/patch.json?" + random;
-    console.log(latestjson,patchurl)
+    //console.log(latestjson,patchurl)
 
     const response = await fetch(patchurl);
     const json = await response.json();
@@ -140,9 +140,8 @@ async function getPatches() {
     const version = item.version;
     const description = item.description;
 
-    console.log(item.date)
+    //console.log(item.date)
     const date = new Date(item.date).toDateString();
-    const category = item.category;
 
     note = '';
     for (let i = 0; i < item.patch_notes.length; i++) {
@@ -161,7 +160,37 @@ async function getPatches() {
             </div>
         </div>
     `;
-    document.getElementById('feed').innerHTML = html;
+    document.getElementById('patch').innerHTML = html;
+
+    for (let i = latestjson.prev_versions.length; i > 0; i--) {
+        if (i == latestjson.prev_versions.length - 3) {
+            break;
+        }
+        const prev_version = latestjson.prev_versions[i-1];
+        const prev_url = "http://192.168.0.196/bound/patches/" + prev_version + "/patch.json?" + random;
+        const prev_response = await fetch(prev_url);
+        const prev_json = await prev_response.json();
+        let prev_html = "";
+        const prev_item = prev_json;
+        const prev_title = prev_item.title;
+        const prev_description = prev_item.description;
+
+        const date = new Date(prev_item.date).toDateString();
+
+        prev_html += `
+            <div class="sub-patch">
+                <div class="title">${prev_title}</div>
+                <div class="description">${prev_description}</div>
+                <div class="container">
+                    <div class="version">${prev_version}</div>
+                    <div class="date">${date}</div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('prev-patch').innerHTML += prev_html;
+
+    }
 }
 
 

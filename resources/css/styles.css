@@ -323,15 +323,72 @@ input[type="checkbox"]:focus {
 
 
 
-#section1 {
-    height: 600px;
-    background-color: pink;
-  }
-  
-  #section2 {
-    height: 600px;
-    background-color: yellow;
-  }
+.game-manager {
+    height: calc(100% - 50px);
+    background-color: var(--standard-colour);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--standard-border-colour);
+    border-radius: var(--border-radius-value);
+    
+    margin-bottom: 25px;
+    transition: ease background-color 0.2s;
+}
+
+.game-manager .menu {
+    height: 40px;
+    padding: 5px;
+}
+
+.game-manager:hover {
+    background-color: var(--background-colour);
+}
+
+
+.card {
+    flex-grow: 2;
+    position: relative;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.8 , 0.25, 1);
+    padding: 0;
+}
+
+.card:hover {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-image {
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width:100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card-content {
+    position: absolute;
+    z-index: 2;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.card-text p {
+    margin-bottom: 0;
+}
 
 
 .patch {
@@ -344,7 +401,14 @@ input[type="checkbox"]:focus {
     border-radius: var(--border-radius-value);
     border: 1px solid var(--standard-border-colour);
     transition: ease all 0.2s;
+    margin-bottom: 25px;
 }
+
+
+.patch:hover {
+    background-color: var(--background-colour);
+}
+
 
 .patch .title {
     font-size: 2em;
@@ -389,4 +453,75 @@ input[type="checkbox"]:focus {
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#prev-patch {
+    display: flex;
+    gap: 25px;
+}
+
+.sub-patch {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding: 15px;
+    height: 100px;
+    width: 0;
+    background-color: var(--standard-colour);
+    margin-bottom: 25px;
+    border-radius: var(--border-radius-value);
+    border: 1px solid var(--standard-border-colour);
+    transition: ease all 0.2s;
+    flex-grow: 1;
+}
+
+.sub-patch:hover {
+    background-color: var(--background-colour);
+}
+
+.sub-patch .title {
+    font-size: 1.25em;
+    margin-right: auto;
+    color: white;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden; 
+    -o-text-overflow: ellipsis; 
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+
+.sub-patch .description {
+    white-space: nowrap;
+    overflow: hidden; 
+    flex-grow: 1;
+    -o-text-overflow: ellipsis; 
+    text-overflow: ellipsis;
+}
+
+
+.sub-patch .container {
+    display: flex;
+    position: relative;
+    bottom:0;
+    gap: 25px;
+    flex-direction: row;
+}
+
+.sub-patch .container .version {
+    padding:5px;
+    background-color: var(--standard-colour);
+    border-radius: var(--border-radius-value);
+    border: 1px solid var(--standard-border-colour);
+    flex-grow: 1;
+    text-align: center;
+}
+
+.sub-patch .container .date {
+    padding:5px;
+    background-color: var(--standard-colour);
+    border-radius: var(--border-radius-value);
+    border: 1px solid var(--standard-border-colour);
+    flex-grow: 1;
+    text-align:center;
 }

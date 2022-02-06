@@ -25,6 +25,8 @@
     --open-icon-animation-duration: 2.5s;
 }
 
+
+
 html,body {
     user-select: none;
     -webkit-user-select: none;
@@ -192,7 +194,7 @@ body {
     0% {
         opacity: 1;
         z-index: 10;
-        transform: translate(0);
+        
     }
 
     80% {
@@ -200,7 +202,6 @@ body {
     }
     99% {
         opacity: 0;
-        transform: translate(0);
         z-index: 10;
     }
     100% {

@@ -19,6 +19,10 @@
     --button-hover-colour: #e01d54;
     --button-pressed-colour: #7d092a;
     --button-disabled-colour: #450618;
+
+
+    --open-animation-duration: 3s;
+    --open-icon-animation-duration: 2.5s;
 }
 
 html,body {
@@ -28,13 +32,14 @@ html,body {
     font-family: nunito;
 
     background-color: var(--background-colour);
-    color: rgb(255, 255, 255);
+    color: var(--standard-text-colour);
     margin: 0;
     height:100%;
     width: 100%;
 }
 
 body {
+    background-color: var(--background-colour);
     display: flex;
     flex-direction: column;
     flex: 1 1 0;
@@ -61,7 +66,7 @@ body {
     border-radius: var(--border-radius-value);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    z-index: 10;
+    z-index: 5;
     backdrop-filter: blur(var(--blur-amount));
 }
 
@@ -149,7 +154,7 @@ body {
     border-radius: var(--border-radius-value);
     left: 55px;
     /* Position the tooltip */
-    transition: ease background-color 0.2s;
+    transition: ease opacity 0.2s;
     position: absolute;
     opacity: 0;
 }
@@ -181,3 +186,82 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: var(--button-hover-colour); 
   }
+  
+/* Create a keyframe animation */
+@keyframes openingScreen {
+    0% {
+        opacity: 1;
+        z-index: 10;
+        transform: translate(0);
+    }
+
+    80% {
+        opacity: 1;
+    }
+    99% {
+        opacity: 0;
+        transform: translate(0);
+        z-index: 10;
+    }
+    100% {
+        z-index: -1;
+    }
+}
+
+.openingAnimation {
+    position: absolute;
+    background-color: var(--background-colour);
+    width: 100%;
+    height: 100%;
+    
+    z-index: -1;
+    opacity: 0;
+    animation: openingScreen var(--open-animation-duration) ease;
+}
+
+/* Create a keyframe that bounces an image in the center of the screen */
+@keyframes bounce {
+    0% {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+        top:50%;
+        left:50%;
+        width: 100px;
+        height: 100px;
+        margin: 0;
+    }
+    25% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+    75% {
+        transform: translate(-50%, -50%);
+        margin: 0;
+        top:50%;
+        left:50%;
+        height: 100px;
+        width: 100px;
+    }
+    100% {
+        transform: translate(-25%, -25%);
+        top:0;
+        left:0;
+        margin: 25px;
+        height: 50px;
+        width: 50px;
+    }
+}
+
+.openingAnimation .icon {
+    margin: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-image: url(../images/icons/app/appIcon-main.png);
+    transform: translate(-50%, -50%);
+    
+    animation: bounce var(--open-icon-animation-duration) ease-in-out;
+}

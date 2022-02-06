@@ -106,6 +106,7 @@
     padding-left: 55px;
     padding-right: 55px;
     height:calc(100% - 75px);
+    word-wrap: break-word;
 }
 
 #feed {
@@ -318,4 +319,74 @@ input[type="checkbox"]:focus {
 .toggle:checked:after {
     background: var(--button-hover-colour);
     transform: translatex(16px);
+}
+
+
+
+#section1 {
+    height: 600px;
+    background-color: pink;
+  }
+  
+  #section2 {
+    height: 600px;
+    background-color: yellow;
+  }
+
+
+.patch {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding: 25px;
+    background-color: var(--standard-colour);
+
+    border-radius: var(--border-radius-value);
+    border: 1px solid var(--standard-border-colour);
+    transition: ease all 0.2s;
+}
+
+.patch .title {
+    font-size: 2em;
+
+    margin-right: auto;
+    color: white;
+    text-decoration: none;
+}
+
+.patch .date {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background-color: var(--standard-colour);
+    border-radius: var(--border-radius-value);
+    border: 1px solid var(--standard-border-colour);
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.patch .version {
+    background-color: var(--standard-colour);
+    border-radius: var(--border-radius-value);
+    border: 1px solid var(--standard-border-colour);
+
+    height: 30px;
+    width: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.patch .changes {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

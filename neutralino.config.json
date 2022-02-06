@@ -36,7 +36,7 @@
       "minWidth": 1024,
       "minHeight": 600,
       "fullScreen": false,
-      "alwaysOnTop": false,
+      "alwaysOnTop": true,
       "icon": "/resources/images/icons/app/appIcon.png",
       "enableInspector": true,
       "borderless": true,

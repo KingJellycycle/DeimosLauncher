@@ -73,8 +73,20 @@ if (NL_OS != "Darwin") { // TODO: Fix https://github.com/neutralinojs/neutralino
     setTray();
 }
 
-// LOAD PAGE
-load_page('pages/home.html');
+
+async function load_page(url) {
+    mainview.innerHTML = await(await fetch(url)).text();
+    if (url == 'pages/home.html') {
+        getNews();
+    }
+    if (url == 'pages/bound.html') {
+        getPatches();
+    }
+}
+
+function open_in_new_tab(url) {
+    Neutralino.os.open(url);
+}
 
 // Fetch XML feed from https://www.kingjellycycle.com/feed.xml
 // and display it in the mainview
@@ -107,17 +119,52 @@ async function getNews() {
     }
     document.getElementById('feed').innerHTML = html;
 }
-
-async function load_page(url) {
-    mainview.innerHTML = await(await fetch(url)).text();
-    if (url == 'pages/home.html') {
-        getNews();
-    }
-}
-
-
-function open_in_new_tab(url) {
-    Neutralino.os.open(url);
-}
-
 // getNews();
+
+// Fetch json data from http://192.168.0.196/bound/patches/latest.json and display it in the mainview */
+async function getPatches() {
+    // Generate a random number 
+    const random = Math.floor(Math.random() * 100);
+
+    const latesturl = "http://192.168.0.196/bound/patches/latest.json?" + random;
+    const latestresponse = await fetch(latesturl);
+    const latestjson = await latestresponse.json();
+    const patchurl = "http://192.168.0.196/bound/patches/" + latestjson.version + "/patch.json?" + random;
+    console.log(latestjson,patchurl)
+
+    const response = await fetch(patchurl);
+    const json = await response.json();
+    let html = "";
+    const item = json;
+    const title = item.title;
+    const version = item.version;
+    const description = item.description;
+
+    console.log(item.date)
+    const date = new Date(item.date).toDateString();
+    const category = item.category;
+
+    note = '';
+    for (let i = 0; i < item.patch_notes.length; i++) {
+        note += `<div class="note">${item.patch_notes[i]}</div>`;
+    }
+
+    html += `
+        <div class="patch">
+            <div class="title">${title}</div>
+            <div class="date">${date}</div>
+            <div class="version">${version}</div>
+            <div class="description">${description}</div>
+            <div class="changes">Changes:</div>
+            <div class="patchlist">
+                ${note}
+            </div>
+        </div>
+    `;
+    document.getElementById('feed').innerHTML = html;
+}
+
+
+
+// LOAD PAGE
+load_page('pages/home.html');

@@ -8,12 +8,6 @@
     z-index: 1;
 }
 
-/* create a new selector for the draggable element */
-.draggable {
-    -webkit-app-region: drag;
-    cursor: move;
-}
-
 /* create a 45px icon in the top left corner */
 .topbar:before {
     content: "";
@@ -82,9 +76,7 @@
 }
 
 .mainview {
-    user-select: text;
-    -webkit-user-select: text;
-    -moz-user-select: text;
+
     border-radius: 5px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -100,6 +92,14 @@
     position: relative;
     text-align: center;
     font-size: 2.5em;
+}
+
+.mainview .pagetitle.bound {
+    height: 54px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:  118px 40px;
+    background-image: url("/images/bound/title.png");
 }
 
 .mainview .content {
@@ -156,6 +156,16 @@
 
 .article:hover {
     background-color: rgba(0,0,0,0.4);
+}
+
+.article.post {
+    border-radius: var(--border-radius-value) !important;
+
+}
+
+.article.post:hover {
+    background-color: initial;
+    background-color: var(--standard-colour);
 }
 
 .article:first-child {
@@ -324,7 +334,7 @@ input[type="checkbox"]:focus {
 
 
 .game-manager {
-    height: calc(100% - 50px);
+    height: calc(100%);
     background-color: var(--standard-colour);
     display: flex;
     flex-direction: column;
@@ -336,8 +346,25 @@ input[type="checkbox"]:focus {
 }
 
 .game-manager .menu {
-    height: 40px;
-    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    align-items: center;
+
+    height: 75px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.game-manager .menu .button {
+    
+    width: 75px;
+    padding: 5px 10px;
+}
+
+.game-manager .menu .button#id {
+    margin-right: auto;
 }
 
 .game-manager:hover {
@@ -348,42 +375,39 @@ input[type="checkbox"]:focus {
 .card {
     flex-grow: 2;
     position: relative;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    border-radius: 5px;
-    transition: box-shadow 0.3s cubic-bezier(0.25, 0.8 , 0.25, 1);
     padding: 0;
-}
 
-.card:hover {
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card-image {
-    z-index: 1;
+    z-index: 0;
     position: absolute;
     height: 100%;
     width:100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: var(--border-radius-value);
 }
 
 .card-content {
     position: absolute;
-    z-index: 2;
+    bottom: 0;
+    z-index: 0;
     padding: 20px;
+    width: calc(100% - 40px);
+    border-bottom-left-radius: var(--border-radius-value);
+    border-bottom-right-radius: var(--border-radius-value);
+    background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 20%, rgba(0,0,0,0.5) 100%);
 }
 
 .card-title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 1.5em;
+
 }
 
 .card-text {
-    font-size: 14px;
-    margin-bottom: 20px;
+    font-size: 1.1em;
 }
 
 .card-text p {

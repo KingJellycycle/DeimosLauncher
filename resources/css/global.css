@@ -28,6 +28,7 @@
 
 
 html,body {
+    cursor: default;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -126,7 +127,8 @@ body {
 }
 
 .nav span.bound {
-    background-image: url("/images/icons/nav/Blog-Icon.svg");
+    background-size: 24px 24px;
+    background-image: url("/images/icons/nav/Bound-Icon.png");
 }
 
 .nav span.information {
@@ -258,6 +260,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+
     width: 50px;
     height: 50px;
     background-size: cover;

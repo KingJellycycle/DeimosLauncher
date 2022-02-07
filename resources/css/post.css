@@ -1,0 +1,72 @@
+    /* 
+START
+    POST PAGE STUFF
+
+*/
+div.post .entry {
+    padding: 25px;
+}
+
+div.post a {
+    text-decoration: underline;
+    color: rgb(0, 162, 255);
+    color: #ffd9a7;
+    transition: all .1s ease;
+}
+
+div.post a:hover {
+    color: #ffffff;
+}
+
+div.post .date {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+/* 
+END
+    POST PAGE STUFF
+
+*/
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.8em;
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+h4 {}
+
+h5 {}
+
+h6 {}
+
+
+h1.subtitle {
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+div.post {
+    font-size: 1.1em;
+}
+
+div.container.center {}
+
+@media (max-width:1360px) {}
+
+@media (max-width:720px) {}

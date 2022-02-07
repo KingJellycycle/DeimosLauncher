@@ -1,4 +1,9 @@
+
 const mainview = document.getElementsByClassName("mainview")[0];
+window.__forceSmoothScrollPolyfill__ = true;
+
+var newsPosts = [];
+var boundPatches = [];
 
 function showInfo() {
     document.getElementById('info').innerHTML = `
@@ -63,7 +68,6 @@ function onWindowMinimize() {
 
 Neutralino.init();
 
-// this doesn't work?
 Neutralino.window.setDraggableRegion("draggable");
 
 Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
@@ -74,8 +78,34 @@ if (NL_OS != "Darwin") { // TODO: Fix https://github.com/neutralinojs/neutralino
 }
 
 
+async function generatePage(type,index) {
+    if (type == "news") {
+        const item = newsPosts[index];
+        const content = item.getElementsByTagName("content")[0].childNodes[0].nodeValue;
+        const html = `<div class="article post">
+            ${content}
+        </div>`;
+
+        let parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        for (i = 0; i < doc.getElementsByTagName("a").length; i++) {
+            const link = doc.getElementsByTagName("a")[i];
+            link.setAttribute("onclick", "open_in_new_tab('" + link.getAttribute("href") + "')");
+            link.setAttribute("href", "#");
+        }
+
+        await load_page('pages/article.html');
+
+        document.getElementById('feed').innerHTML = doc.documentElement.innerHTML;
+        document.getElementById("ArticleTitle").innerHTML = item.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+
+    }
+}
+
 async function load_page(url) {
     mainview.innerHTML = await(await fetch(url)).text();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     if (url == 'pages/home.html') {
         getNews();
     }
@@ -97,8 +127,11 @@ async function getNews() {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xml, "text/xml");
     const items = xmlDoc.getElementsByTagName("entry");
+    newsPosts = [];
+
     let html = "";
     for (let i = 0; i < items.length; i++) {
+        newsPosts.push(items[i]);
         const item = items[i];
         const title = item.getElementsByTagName("title")[0].childNodes[0].nodeValue;
         const link = item.getElementsByTagName("link")[0].getAttribute("href");
@@ -112,11 +145,12 @@ async function getNews() {
                 <div class="container">
                     <div class="date">${date} - ${category}</div>
                     <div class="type"></div>
-                    <a href="#" onclick="open_in_new_tab('${link}')" class="button">Read</a>
+                    <a href="#" onclick="generatePage('news',${i})" class="button">Read</a>
                 </div>
             </div>
         `;
     }
+    console.log(newsPosts);
     document.getElementById('feed').innerHTML = html;
 }
 // getNews();

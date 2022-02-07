@@ -77,7 +77,6 @@ if (NL_OS != "Darwin") { // TODO: Fix https://github.com/neutralinojs/neutralino
     setTray();
 }
 
-
 async function generatePage(type,index) {
     if (type == "news") {
         const item = newsPosts[index];
@@ -101,6 +100,45 @@ async function generatePage(type,index) {
         document.getElementById("ArticleTitle").innerHTML = item.getElementsByTagName("title")[0].childNodes[0].nodeValue;
 
     }
+
+    if (type == "patch") {
+        const versionPage = boundPatches[index];
+        console.log(index, versionPage)
+        const random = Math.floor(Math.random() * 100);
+        const response = await fetch("http://192.168.0.196/bound/patches/" + versionPage + "/patch.json?" + random);
+        const json = await response.json();
+        let html = "";
+        const item = json;
+        const title = item.title;
+        const version = item.version;
+        const description = item.description;
+    
+        //console.log(item.date)
+        const date = new Date(item.date).toDateString();
+    
+        note = '';
+        for (let i = 0; i < item.patch_notes.length; i++) {
+            note += `<div class="note">${item.patch_notes[i]}</div>`;
+        }
+    
+        html += `
+            <div class="patch">
+                <div class="date">${date}</div>
+                <div class="version">${version}</div>
+                <div class="description">${description}</div>
+                <div class="changes">Changes:</div>
+                <div class="patchlist">
+                    ${note}
+                </div>
+            </div>
+        `;
+
+        await load_page('pages/article.html');
+
+        document.getElementById('feed').innerHTML = html;
+        document.getElementById("ArticleTitle").innerHTML = title;
+
+    }
 }
 
 async function load_page(url) {
@@ -114,7 +152,7 @@ async function load_page(url) {
     }
 }
 
-function open_in_new_tab(url) {
+async function open_in_new_tab(url) {
     Neutralino.os.open(url);
 }
 
@@ -150,7 +188,7 @@ async function getNews() {
             </div>
         `;
     }
-    console.log(newsPosts);
+    //console.log(newsPosts);
     document.getElementById('feed').innerHTML = html;
 }
 // getNews();
@@ -196,6 +234,12 @@ async function getPatches() {
     `;
     document.getElementById('patch').innerHTML = html;
 
+    for (let i = 0; i < latestjson.prev_versions.length; i++) {
+        boundPatches.push(latestjson.prev_versions[i]);
+        console.log(latestjson.prev_versions[i])
+    }
+
+
     for (let i = latestjson.prev_versions.length; i > 0; i--) {
         if (i == latestjson.prev_versions.length - 3) {
             break;
@@ -212,14 +256,14 @@ async function getPatches() {
         const date = new Date(prev_item.date).toDateString();
 
         prev_html += `
-            <div class="sub-patch">
+            <a href="#" onclick="generatePage('patch', ${i-1})" class="sub-patch">
                 <div class="title">${prev_title}</div>
                 <div class="description">${prev_description}</div>
                 <div class="container">
                     <div class="version">${prev_version}</div>
                     <div class="date">${date}</div>
                 </div>
-            </div>
+            </a>
         `;
 
         document.getElementById('prev-patch').innerHTML += prev_html;

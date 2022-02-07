@@ -485,6 +485,8 @@ input[type="checkbox"]:focus {
 }
 
 .sub-patch {
+    text-decoration: none;
+    color: white;
     display: flex;
     position: relative;
     flex-direction: column;

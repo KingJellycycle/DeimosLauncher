@@ -10,12 +10,11 @@ div.post .entry {
 div.post a {
     text-decoration: underline;
     color: rgb(0, 162, 255);
-    color: #ffd9a7;
     transition: all .1s ease;
 }
 
 div.post a:hover {
-    color: #ffffff;
+    color: rgb(0, 87, 138);
 }
 
 div.post .date {

@@ -115,6 +115,7 @@
 }
 
 .flex-container {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -128,6 +129,7 @@
 .flex-container .container-1 {
     border: 1px solid var(--standard-border-colour);
     border-radius: var(--border-radius-value);
+    position: relative;
     width: 250px;
     height: 100%;
     background-color: var(--standard-colour);
@@ -136,9 +138,19 @@
 .flex-container .container-2 {
     border: 1px solid var(--standard-border-colour);
     border-radius: var(--border-radius-value);
+    position: relative;
     flex-grow: 2;
     height: 100%;
     background-color: var(--standard-colour);
+}
+
+.flex-container .container-2 .button.save {
+    position: absolute;
+    width: 150px;
+    bottom: 15px;
+    margin: auto;
+    
+
 }
 
 /* article */
@@ -155,7 +167,7 @@
 }
 
 .article:hover {
-    background-color: rgba(0,0,0,0.4);
+    background-color: var(--background-colour);
 }
 
 .article.post {
@@ -187,7 +199,7 @@
     font-size: 2em;
 
     margin-right: auto;
-    color: white;
+    color: var(--standard-text-colour);
     text-decoration: none;
 }
 
@@ -288,6 +300,11 @@
     background-color: var(--button-pressed-colour);
 }
 
+.button.play {
+    border-radius: 0;
+    border-top-left-radius: var(--border-radius-value);
+}
+
 input[type="checkbox"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -376,6 +393,7 @@ input[type="checkbox"]:focus {
     flex-grow: 2;
     position: relative;
     padding: 0;
+    color: white;
 
 }
 
@@ -384,6 +402,7 @@ input[type="checkbox"]:focus {
     position: absolute;
     height: 100%;
     width:100%;
+    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -395,6 +414,7 @@ input[type="checkbox"]:focus {
     bottom: 0;
     z-index: 0;
     padding: 20px;
+
     width: calc(100% - 40px);
     border-bottom-left-radius: var(--border-radius-value);
     border-bottom-right-radius: var(--border-radius-value);
@@ -403,7 +423,6 @@ input[type="checkbox"]:focus {
 
 .card-title {
     font-size: 1.5em;
-
 }
 
 .card-text {
@@ -438,7 +457,7 @@ input[type="checkbox"]:focus {
     font-size: 2em;
 
     margin-right: auto;
-    color: white;
+    color: var(--standard-text-colour);
     text-decoration: none;
 }
 
@@ -486,7 +505,7 @@ input[type="checkbox"]:focus {
 
 .sub-patch {
     text-decoration: none;
-    color: white;
+    color: var(--standard-text-colour);
     display: flex;
     position: relative;
     flex-direction: column;
@@ -508,7 +527,7 @@ input[type="checkbox"]:focus {
 .sub-patch .title {
     font-size: 1.25em;
     margin-right: auto;
-    color: white;
+    color: var(--standard-text-colour);
     white-space: nowrap;
     width: 100%;
     overflow: hidden; 
@@ -537,8 +556,8 @@ input[type="checkbox"]:focus {
 .sub-patch .container .version {
     padding:5px;
     background-color: var(--standard-colour);
-    border-radius: var(--border-radius-value);
     border: 1px solid var(--standard-border-colour);
+    border-radius: var(--border-radius-value);
     flex-grow: 1;
     text-align: center;
 }

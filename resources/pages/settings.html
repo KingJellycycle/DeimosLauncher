@@ -4,12 +4,16 @@
     <div class="flex-container">
         <div class="container-1">
             <div class="option">
-                <div class="text">Background Updates</div>
-                <input type="checkbox" class="toggle">
+                <div class="text">Light Theme</div>
+                <input type="checkbox" class="toggle" id="theme">
             </div>
             <div class="option">
-                <div class="text">????</div>
-                <input type="checkbox" class="toggle">
+                <div class="text">Background Updates</div>
+                <input type="checkbox" class="toggle" id="background_update">
+            </div>
+            <div class="option">
+                <div class="text">Desktop Notifications</div>
+                <input type="checkbox" class="toggle" id="show_desktop_notifications">
             </div>
             <div class="option">
                 <div class="text">Fancy!</div>
@@ -17,6 +21,6 @@
             </div>
             
         </div>
-        <div class="container-2"><a class="button">Save</a></div>
+        <div class="container-2"><a onclick="save_settings()" class="button save">Save</a></div>
     </div>
 </div>

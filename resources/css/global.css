@@ -5,6 +5,11 @@
     font-weight: 500;
   }
 :root {
+    --open-animation-duration: 3s;
+    --open-icon-animation-duration: 2.5s;
+}
+
+html.dark {
     
     --blur-amount: 15px;
     --border-radius-value: 5px;
@@ -21,11 +26,33 @@
     --button-disabled-colour: #450618;
 
 
-    --open-animation-duration: 3s;
-    --open-icon-animation-duration: 2.5s;
+}
+
+html.light {
+        
+    --blur-amount: 15px;
+    --border-radius-value: 5px;
+    --standard-colour: rgba(236, 236, 236, 0.6);
+    --standard-border-colour: rgba(172, 172, 172, 0.6);
+    --standard-text-colour: rgb(0, 0, 0);
+    --dimmed-text: rgba(200, 200, 200, 0.9);
+
+    --background-colour: #ffffff;
+
+    --button-initial-colour: #9e0b35;
+    --button-hover-colour: #e01d54;
+    --button-pressed-colour: #7d092a;
+    --button-disabled-colour: #450618;
 }
 
 
+html.light .windowOptions .minimise {
+    filter: brightness(0%);
+}
+
+html.light .windowOptions .close {
+    filter: brightness(0%);
+}
 
 html,body {
     cursor: default;
@@ -191,6 +218,55 @@ body {
     background: var(--button-hover-colour); 
   }
   
+
+#toast-container {
+    position: absolute;
+    z-index: 9;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    transition: all 0.5s ease;
+    pointer-events: none
+}
+
+.toast {
+    border-radius: var(--border-radius-value);
+    background-color: var(--button-initial-colour);
+    color: white;
+    z-index: 2;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+
+    width: auto;
+    max-width: 250px;
+    text-align: center;
+    transition: all 0.5s ease;
+    opacity: 0;
+    visibility: show;
+    transform: translateY(0px);
+}
+
+.toast.show {
+    opacity: 1;
+    transition: all 0.5s ease;
+    transform: translateY(-25px);
+}
+
+.toast.flat {
+    visibility: hidden !important;
+    transition: all 0.5s ease;
+    height:0;
+    padding: 0;
+    opacity: 0;
+    color: rgba(0, 0, 0, 0);
+    margin-bottom: 0;
+    transform: translateY(-25px);
+}
+
 /* Create a keyframe animation */
 @keyframes openingScreen {
     0% {

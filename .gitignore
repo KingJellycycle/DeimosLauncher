@@ -1,13 +1,19 @@
 # Developer tools' files
 .lite_workspace.lua
 
-# Neutralinojs binaries and builds
+# binaries and builds
+/build/*
 /bin
 /dist
 
 # Storage and Libs
 /bstools/*
 /Deimos_Storage/*
+
+# cache 
+/__pycache__/*
+*.spec
+build.sh
 
 # Neutralinojs client (minified)
 neutralino.js

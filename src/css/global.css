@@ -4,6 +4,13 @@
     src: url(../fonts/NunitoSans-Regular.ttf);
     font-weight: 500;
   }
+
+
+html,body  {
+    transition: background-color 0.4s ease;
+}
+
+
 :root {
     --open-animation-duration: 3s;
     --open-icon-animation-duration: 2.5s;
@@ -25,7 +32,6 @@ html.dark {
     --button-pressed-colour: #7d092a;
     --button-disabled-colour: #450618;
 
-
 }
 
 html.light {
@@ -43,6 +49,7 @@ html.light {
     --button-hover-colour: #e01d54;
     --button-pressed-colour: #7d092a;
     --button-disabled-colour: #450618;
+
 }
 
 
@@ -51,6 +58,10 @@ html.light .windowOptions .minimise {
 }
 
 html.light .windowOptions .close {
+    filter: brightness(0%);
+}
+
+html.light .pagetitle.bound {
     filter: brightness(0%);
 }
 
@@ -150,20 +161,20 @@ body {
 
 
 .nav span.home {
-    background-image: url("/images/icons/nav/Home-Icon.svg");
+    background-image: url("../images/icons/nav/Home-Icon.svg");
 }
 
 .nav span.bound {
     background-size: 24px 24px;
-    background-image: url("/images/icons/nav/Bound-Icon.png");
+    background-image: url("../images/icons/nav/Bound-Icon.png");
 }
 
 .nav span.information {
-    background-image: url("/images/icons/nav/Information-Icon.svg");
+    background-image: url("../images/icons/nav/Information-Icon.svg");
 }
 
 .nav span.settings {
-    background-image: url("/images/icons/nav/Settings-Icon.svg");
+    background-image: url("../images/icons/nav/Settings-Icon.svg");
 }
 
 .nav span:hover {

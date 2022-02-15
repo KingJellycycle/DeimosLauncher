@@ -1,6 +1,6 @@
 # Deimos Launcher
 Welcome to my personal game launcher!
-Based on the original design of the godot version I moved this project to Neutralino due to ease of use!
+Based on the original design of the godot version I moved this project to pywebviewer due to ease of use!
 
 ## What's it do?
 I plan to have it keep users up to date on Bound, and future games!

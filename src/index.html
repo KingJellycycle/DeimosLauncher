@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html class="dark">
     <head>
         <meta charset="UTF-8">
         <title>Deimos</title>
-        <link rel="stylesheet" href="css/global.css">
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="./css/global.css">
+        <link rel="stylesheet" href="./css/styles.css">
 
     </head>
     <body>
@@ -18,31 +18,31 @@
         </div>
         <div id="draggable" class="topbar">
             <div class="windowOptions">
-                <div onclick="onWindowMinimize()" class="minimise"></div>
-                <div onclick="onWindowClose()" class="close"></div>
+                <div onclick="minimise_app()" class="minimise"></div>
+                <div onclick="exit_app()" class="close"></div>
             </div>
         </div>
         <div id="nav" class="nav">
-            <a href="#" onclick="load_page('pages/home.html');">
+            <a href="#" onclick="set_page('home.html');">
                 <span class="home">
                     <div class="tooltip">Home</div>
                     <div class="notification"></div>
                 </span>
             </a>
-            <a href="#" onclick="load_page('pages/bound.html')">
+            <a href="#" onclick="set_page('bound.html')">
                 <span class="bound">
                     <div class="tooltip">Bound</div>
                     <div class="notification"></div>
                 </span>
             </a>
-            <a href="#" onclick="load_page('pages/settings.html')">
+            <a href="#" onclick="set_page('settings.html')">
                 <span class="settings">
                     <div class="tooltip">Settings</div>
                     <div class="notification"></div>
                 </span>
             </a>
         </div>
-        <div class="mainview">
+        <div id="mainview" class="mainview">
             >.>
         </div>
         <div class="bottombar">
@@ -50,12 +50,12 @@
                 <div class="progress-text" id="progress_text">20%</div>
                 <div class="progress" id="progress_bar" style="width: 0%"></div>
             </div>
-            <a onclick="generate_toast('Testing 1 2 3!')" class="button play">
+            <a onclick="set_patches()" class="button play">
                 Play
             </a>
         </div>
-        <script src="js/neutralino.js"></script>
         <script src="js/main.js"></script>
-        <!--<script src="js/gamemanager.js"></script>-->
+        <!--<script src="js/neutralino.js"></script>
+        <script src="js/gamemanager.js"></script>-->
     </body>
 </html>

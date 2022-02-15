@@ -5,6 +5,10 @@
 /bin
 /dist
 
+# Storage and Libs
+/bstools/*
+/Deimos_Storage/*
+
 # Neutralinojs client (minified)
 neutralino.js
 

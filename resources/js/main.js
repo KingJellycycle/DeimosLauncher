@@ -7,6 +7,11 @@ var boundPatches = [];
 var boundPrimaryPatch = []
 var boundSubPatchesHtml = ``
 
+var os = NL_OS;
+
+var _server_address = "http://192.168.0.196/"
+var _news_address = "https://www.kingjellycycle.com/feed.xml"
+
 
 var _settings = {
     // Theme Settings
@@ -180,7 +185,7 @@ async function generate_page(type, index) {
         const versionPage = boundPatches[index];
         //console.log(index, versionPage)
         const random = Math.floor(Math.random() * 100);
-        const response = await fetch("http://192.168.0.196/bound/patches/" + versionPage + "/patch.json?" + random);
+        const response = await fetch(_server_address + "/bound/patches/" + versionPage + "/patch.json?" + random);
         const json = await response.json();
         let html = "";
         const item = json;
@@ -221,6 +226,7 @@ async function generate_page(type, index) {
 async function load_page(url) {
     mainview.innerHTML = await(await fetch(url)).text();
     window.scrollTo({top: 0, behavior: 'smooth'});
+    console.log(url)
     if (url == 'pages/home.html') {
         if (newsPosts.length === 0) {
             await updateNews();
@@ -299,7 +305,7 @@ async function updateNews() {
     // Random number to force load feed
     //generate_toast("Updating News!");
     const random = Math.floor(Math.random() * 100);
-    const url = "https://www.kingjellycycle.com/feed.xml?" + random;
+    const url = _news_address + "?" + random;
     const response = await fetch(url);
     const xml = await response.text();
     const parser = new DOMParser();
@@ -324,10 +330,10 @@ async function updatePatches() {
     // Generate a random number
     const random = Math.floor(Math.random() * 100);
 
-    const latesturl = "http://192.168.0.196/bound/patches/latest.json?" + random;
+    const latesturl = _server_address + "bound/patches/latest.json?" + random;
     const latestresponse = await fetch(latesturl);
     const latestjson = await latestresponse.json();
-    const patchurl = "http://192.168.0.196/bound/patches/" + latestjson.version + "/patch.json?" + random;
+    const patchurl = _server_address + "bound/patches/" + latestjson.version + "/patch.json?" + random;
     // console.log(latestjson,patchurl)
 
     const response = await fetch(patchurl);
@@ -372,7 +378,7 @@ async function updatePatches() {
         }
         const random = Math.floor(Math.random() * 100);
         const version = boundPatches[i - 1];
-        const url = "http://192.168.0.196/bound/patches/" + version + "/patch.json?" + random;
+        const url = _server_address + "bound/patches/" + version + "/patch.json?" + random;
         const response = await fetch(url);
         const json = await response.json();
         const item = json;
@@ -393,6 +399,31 @@ async function updatePatches() {
         `;
     }
 };
+
+
+
+async function set_progress(percent) {
+    var progress_bar = document.getElementById("progress_bar");
+    var progress_text = document.getElementById("progress_text");
+
+    progress_bar.style.width = percent + "%";
+    progress_text.innerHTML = percent + "%";
+    if (percent == 0) {
+        progress_text.innerHTML = "";
+    } else if (percent == 100) {
+        progress_text.innerHTML = "Complete!";
+    }
+}
+
+var worker = new Worker('js/GMWW.js');
+
+
+worker.addEventListener('message', function(e) {
+  console.log(e.data);
+})
+
+worker.postMessage("Neutralino");
+
 
 // Initialisation stuffs!
 // GET news and patch data and store them

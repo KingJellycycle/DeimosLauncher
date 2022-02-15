@@ -26,16 +26,19 @@
             <a href="#" onclick="load_page('pages/home.html');">
                 <span class="home">
                     <div class="tooltip">Home</div>
+                    <div class="notification"></div>
                 </span>
             </a>
             <a href="#" onclick="load_page('pages/bound.html')">
                 <span class="bound">
                     <div class="tooltip">Bound</div>
+                    <div class="notification"></div>
                 </span>
             </a>
             <a href="#" onclick="load_page('pages/settings.html')">
                 <span class="settings">
                     <div class="tooltip">Settings</div>
+                    <div class="notification"></div>
                 </span>
             </a>
         </div>
@@ -44,16 +47,15 @@
         </div>
         <div class="bottombar">
             <div class="progressbar">
-                <div class="progress-text">20%</div>
-                <div class="progress" style="width: 20%"></div>
+                <div class="progress-text" id="progress_text">20%</div>
+                <div class="progress" id="progress_bar" style="width: 0%"></div>
             </div>
             <a onclick="generate_toast('Testing 1 2 3!')" class="button play">
                 Play
             </a>
         </div>
-
         <script src="js/neutralino.js"></script>
         <script src="js/main.js"></script>
+        <!--<script src="js/gamemanager.js"></script>-->
     </body>
-
 </html>

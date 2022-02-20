@@ -1,4 +1,3 @@
-
 // Storage values!
 var newsPosts = [];
 var boundPatches = [];
@@ -30,6 +29,8 @@ async function minimise_app() {
 
 async function set_page(page) {
     let result = await pywebview.api.set_page(page);
+    //document.getElementById("mainview").scrollTop = 0;
+    //document.getElementById("mainview").scroll(top);
     //console.log(result)
     document.getElementById('mainview').innerHTML = result
 
@@ -54,6 +55,7 @@ async function set_page(page) {
         document.getElementById('show_desktop_notifications').checked = _settings.show_desktop_notifications;
     }
 
+    //document.getElementById("mainview").scrollTop = 0;
     return true
 }
 
@@ -63,6 +65,11 @@ async function get_news() {
         set_news()
     }
     );
+}
+
+async function reload_data() {
+    await get_news()
+    await get_patches()
 }
 
 async function load_settings() {
@@ -128,7 +135,9 @@ async function set_news() {
             </div>
         `;
     }
-    document.getElementById('feed').innerHTML = html;
+    if (document.getElementById('feed')) {
+        document.getElementById('feed').innerHTML = html;
+    }
 }
 
 async function set_patches() {
@@ -177,8 +186,10 @@ async function set_patches() {
         `;
     }
 
-    document.getElementById('patch').innerHTML = current_patch_html;
-    document.getElementById('prev-patch').innerHTML = prev_patch_html;
+    if (document.getElementById('patch')) {
+        document.getElementById('patch').innerHTML = current_patch_html;
+        document.getElementById('prev-patch').innerHTML = prev_patch_html;
+    }
 }
 
 async function generate_toast(string) {
@@ -256,11 +267,76 @@ async function generate_page(type, index) {
 }
 
 
+function SmoothScroll(target, speed, smooth) {
+    if (target === document)
+        target = (document.scrollingElement 
+              || document.documentElement 
+              || document.body.parentNode 
+              || document.body) // cross browser support for document scrolling
+      
+    var moving = false
+    var pos = target.scrollTop
+  var frame = target === document.body 
+              && document.documentElement 
+              ? document.documentElement 
+              : target // safari is the new IE
+  
+    target.addEventListener('mousewheel', scrolled, { passive: false })
+    target.addEventListener('DOMMouseScroll', scrolled, { passive: false })
+
+    function scrolled(e) {
+        e.preventDefault(); // disable default scrolling
+
+        var delta = normalizeWheelDelta(e)
+
+        pos += -delta * speed
+        pos = Math.max(0, Math.min(pos, target.scrollHeight - frame.clientHeight)) // limit scrolling
+
+        if (!moving) update()
+    }
+
+    function normalizeWheelDelta(e){
+        if(e.detail){
+            if(e.wheelDelta)
+                return e.wheelDelta/e.detail/40 * (e.detail>0 ? 1 : -1) // Opera
+            else
+                return -e.detail/3 // Firefox
+        }else
+            return e.wheelDelta/120 // IE,Safari,Chrome
+    }
+
+    function update() {
+        moving = true
+    
+        var delta = (pos - target.scrollTop) / smooth
+    
+        target.scrollTop += delta
+    
+        if (Math.abs(delta) > 0.5)
+            requestFrame(update)
+        else
+            moving = false
+    }
+
+    var requestFrame = function() { // requestAnimationFrame cross browser
+        return (
+            window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function(func) {
+                window.setTimeout(func, 1000 / 50);
+            }
+        );
+    }()
+}
+
 // on dom load
 window.addEventListener('pywebviewready', async function() {
     //console.log(await pywebview.api.set_page('home.html'))
     await load_settings();
     await set_page('home.html');
     generate_toast('Welcome to the PyWebView!');
-
+    new SmoothScroll(document.getElementById("mainview"),20,12)
 });

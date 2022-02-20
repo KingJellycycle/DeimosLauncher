@@ -35,6 +35,22 @@ class Api():
 
         self.gm = GameManager(_server_address, self._settings["bound_dir"])
 
+
+    def ping_servers():
+        # [1] = server address, [2] = news address
+        servers_active = [False,False]
+        try:
+            urllib.request.urlopen(_server_address)
+            servers_active[0] = True
+        except:
+            servers_active[0] = False
+            
+        try:
+            urllib.request.urlopen(_news_address)
+            servers_active[1] = True
+        except:
+            servers_active[1] = False
+
     def set_page(self, page):
         file = codecs.open("./src/pages/"+page, "r", "utf-8")
         return file.read()
@@ -49,6 +65,8 @@ class Api():
         xmlParsed = xml.dom.minidom.parseString(data)
 
         for item in xmlParsed.getElementsByTagName('entry'):
+            if item.getElementsByTagName('category')[0].getAttribute('term') == "Personal":
+                continue 
             #print(item.getElementsByTagName('link')[0].getAttribute('href'))
             title = item.getElementsByTagName('title')[0].childNodes[0].data
             link = item.getElementsByTagName('link')[0].getAttribute('href')

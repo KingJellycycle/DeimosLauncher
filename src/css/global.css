@@ -128,7 +128,23 @@ body {
     transition: background-color 0.2s ease;
 }
 
+.nav .reload {
+    height: 25px;
 
+    border-radius: var(--border-radius-value);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-color 0.2s ease;
+    transition: transform 0.5s ease-in-out
+}
+
+.nav .reload:hover span {
+    transform: rotate(360deg);
+}
 
 .nav a:first-child {
     border-radius: var(--border-radius-value);
@@ -169,6 +185,10 @@ body {
     background-image: url("../images/icons/nav/Bound-Icon.png");
 }
 
+.nav span.reload {
+    background-image: url("../images/icons/nav/Reload-Icon.svg");
+}
+
 .nav span.information {
     background-image: url("../images/icons/nav/Information-Icon.svg");
 }
@@ -177,11 +197,11 @@ body {
     background-image: url("../images/icons/nav/Settings-Icon.svg");
 }
 
-.nav span:hover {
+.nav a:hover {
     background-color: var(--button-hover-colour);
 }
 
-.nav span:active {
+.nav a:active {
     background-color: var(--button-pressed-colour);
 }
 

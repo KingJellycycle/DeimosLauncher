@@ -11,10 +11,19 @@ class GameManager():
         self.server_address = server_address
         self.game_directory = game_directory
 
-        self.latest_version, self.latest_mainline_version, self.version_list = self.get_latest_versions()
-        self.local_version = self.get_local_version()
+        self.server_active = self.ping_server()
+        if self.server_active:
+            self.latest_version, self.latest_mainline_version, self.version_list = self.get_latest_versions()
+            self.local_version = self.get_local_version()
+        #self.download_game()
 
-        self.download_game()
+    def ping_server(self):
+        try:
+            urllib.request.urlopen(self.server_address + "bound/patches/latest.json")
+            return True
+        except:
+            return False
+        pass
 
     def get_local_version(self):
         # Check if file exists
@@ -45,6 +54,7 @@ class GameManager():
 
 
     def download_game(self):
+        
         def _download():
             file_name = ""
             url = ""
